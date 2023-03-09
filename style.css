@@ -1,3 +1,7 @@
 .name-lists {
     display: flex;
 }
+
+ul {
+    list-style: none;
+}

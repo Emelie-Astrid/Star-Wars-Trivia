@@ -17,7 +17,6 @@ class Character {
 }
 
 // let newCharacter = new Character ("Kylo Ren", "Male", "189 cm", "80 kg", "black", "pale", "brown", "3", "link");
-
 // console.log(newCharacter);
 
 //The user should be able to choose two characters (Character 1 & 2) 
@@ -40,19 +39,38 @@ async function getNames() {
 //     return li;
 // }
 
+//Add checkboxes
+//List 1
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
         listName.innerText = person.name;
+        let radio = document.createElement("input");
+        radio.type = "radio";
+        radio.setAttribute("name", "person");
         nameListOne.append(listName);
+        listName.prepend(radio);
     });
 });
 
+//List 2
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
         listName.innerText = person.name;
+        let radio = document.createElement("input");
+        radio.type = "radio";
+        radio.setAttribute("name", "person");
         nameListTwo.append(listName);
+        listName.prepend(radio);
     });
 });
 
+//The user should then be able to click a button to retrieve data 
+//about the characters. Once the data is retrieved, 
+//create two instances of the Character class, 
+//and give the properties of the class values based on the retrieved data. 
+//ATTENTION! The API does not provide you with images 
+//- So you need to produce these yourself.
+
+//Button, check selected characters
