@@ -6,8 +6,8 @@ class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
         this.name = name;
         this.gender = gender;
-        this.height = height;
-        this.height = mass;
+        this.height = Number(height);
+        this.height = Number(mass);
         this.hairColor = hairColor;
         this.skinColor = skinColor;
         this.eyeColor = eyeColor;
@@ -36,6 +36,7 @@ let compareButton = document.querySelector("#compare-button");
 async function getNames() {
     let data = await fetch("https://swapi.dev/api/people/?format=json");
     let json = await data.json();
+    console.log(json);
     return json;
 }
 
@@ -54,6 +55,7 @@ getNames().then((data) => {
         let radio = document.createElement("input");
         radio.type = "radio";
         radio.setAttribute("name", "person");
+        radio.setAttribute("value", person.name);
         nameListOne.append(listName);
         listName.prepend(radio);
     });
@@ -102,7 +104,7 @@ getNames().then((data) => {
 
 infoButtonOne.addEventListener("click", async () => {
     let selectedRadio = document.querySelector('input[name="person"]:checked');
-  
+    infoListOne.innerHTML = "";
     if (!selectedRadio) {
       return;
     }
@@ -125,9 +127,11 @@ infoButtonOne.addEventListener("click", async () => {
       ""
     );
   
-    let listItem = document.createElement("li");
-    listItem.innerText = JSON.stringify(character);
-    infoListOne.appendChild(listItem);
+    Object.entries(character).forEach(([key, value]) => {
+        let listItem = document.createElement("li");
+        listItem.innerText = `${key}: ${value}`;
+        infoListOne.appendChild(listItem);
+      });
   });
 
 //The user should then be able to click a button to retrieve data 
