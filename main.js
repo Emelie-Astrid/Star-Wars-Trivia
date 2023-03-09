@@ -27,8 +27,10 @@ let nameListOne = document.querySelector("#name-list-1");
 let nameListTwo = document.querySelector("#name-list-2");
 // let listDivOne = document.querySelector("#first-list");
 // let listDivTwo = document.querySelector("#second-list");
-let infoListOne = document.querySelector("#char-info-1");
-let infoListTwo = document.querySelector("#char-info-2");
+// let infoListOne = document.querySelector("#char-info-1");
+// let infoListTwo = document.querySelector("#char-info-2");
+let charName = document.querySelector("#char1-name");
+let charName2 = document.querySelector("#char2-name");
 let infoButtonOne = document.querySelector("#char1-button");
 let infoButtonTwo = document.querySelector("#char2-button");
 let compareButton = document.querySelector("#compare-button");
@@ -104,7 +106,7 @@ getNames().then((data) => {
 
 infoButtonOne.addEventListener("click", async () => {
     let selectedRadio = document.querySelector('input[name="person"]:checked');
-    infoListOne.innerHTML = "";
+    // charName.innerHTML = "";
     if (!selectedRadio) {
       return;
     }
@@ -114,6 +116,8 @@ infoButtonOne.addEventListener("click", async () => {
     let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
     let json = await data.json();
     let characterData = json.results[0];
+
+    console.log(characterData);
   
     let character = new Character(
       characterData.name,
@@ -126,12 +130,16 @@ infoButtonOne.addEventListener("click", async () => {
       characterData.films,
       ""
     );
+
+    charName.innerText = characterData.name;
+
+    // console.log(character);
   
-    Object.entries(character).forEach(([key, value]) => {
-        let listItem = document.createElement("li");
-        listItem.innerText = `${key}: ${value}`;
-        infoListOne.appendChild(listItem);
-      });
+    // Object.entries(character).forEach(([key, value]) => {
+    //     let listItem = document.createElement("li");
+    //     listItem.innerText = `${key}: ${value}`;
+    //     infoListOne.appendChild(listItem);
+    //   });
   });
 
 //The user should then be able to click a button to retrieve data 
