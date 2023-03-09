@@ -25,6 +25,13 @@ class Character {
 
 let nameListOne = document.querySelector("#name-list-1");
 let nameListTwo = document.querySelector("#name-list-2");
+// let listDivOne = document.querySelector("#first-list");
+// let listDivTwo = document.querySelector("#second-list");
+let infoListOne = document.querySelector("#char-info-1");
+let infoListTwo = document.querySelector("#char-info-2");
+let infoButtonOne = document.querySelector("#char1-button");
+let infoButtonTwo = document.querySelector("#char2-button");
+let compareButton = document.querySelector("#compare-button");
 
 async function getNames() {
     let data = await fetch("https://swapi.dev/api/people/?format=json");
@@ -39,7 +46,6 @@ async function getNames() {
 //     return li;
 // }
 
-//Add checkboxes
 //List 1
 getNames().then((data) => {
     data.results.forEach((person)=> {
@@ -65,6 +71,64 @@ getNames().then((data) => {
         listName.prepend(radio);
     });
 });
+
+//Info buttons
+
+// infoButtonOne.addEventListener("click", async () => {
+//     let selectedRadio = document.querySelector('input[name="person"]:checked');
+// })
+
+// let characterName = selectedRadio.value;
+
+// let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
+// let json = await data.json();
+// let characterData = json.result[0];
+
+// let character = new Character(
+//     characterData.name,
+//     characterData.gender,
+//     characterData.height,
+//     characterData.mass,
+//     characterData.hair_color,
+//     characterData.skin_color,
+//     characterData.eye_color,
+//     characterData.films,
+//     ""
+// );
+
+// let listItem = document.createElement("li");
+// listItem.innerText = JSON.stringify(character);
+// listDivOne.appendChild(listItem);
+
+infoButtonOne.addEventListener("click", async () => {
+    let selectedRadio = document.querySelector('input[name="person"]:checked');
+  
+    if (!selectedRadio) {
+      return;
+    }
+  
+    let characterName = selectedRadio.value;
+  
+    let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
+    let json = await data.json();
+    let characterData = json.results[0];
+  
+    let character = new Character(
+      characterData.name,
+      characterData.gender,
+      characterData.height,
+      characterData.mass,
+      characterData.hair_color,
+      characterData.skin_color,
+      characterData.eye_color,
+      characterData.films,
+      ""
+    );
+  
+    let listItem = document.createElement("li");
+    listItem.innerText = JSON.stringify(character);
+    infoListOne.appendChild(listItem);
+  });
 
 //The user should then be able to click a button to retrieve data 
 //about the characters. Once the data is retrieved, 
