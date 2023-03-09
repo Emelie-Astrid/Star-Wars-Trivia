@@ -60,7 +60,7 @@ getNames().then((data) => {
         listName.innerText = person.name;
         let radio = document.createElement("input");
         radio.type = "radio";
-        radio.setAttribute("name", "person");
+        radio.setAttribute("name", "person2");
         nameListTwo.append(listName);
         listName.prepend(radio);
     });
