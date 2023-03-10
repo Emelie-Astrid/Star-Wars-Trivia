@@ -106,7 +106,6 @@ getNames().then((data) => {
 
 infoButtonOne.addEventListener("click", async () => {
     let selectedRadio = document.querySelector('input[name="person"]:checked');
-    // charName.innerHTML = "";
     if (!selectedRadio) {
       return;
     }
