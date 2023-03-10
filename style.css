@@ -12,6 +12,6 @@ ul {
     flex-direction: column;
 }
 
-#char1-image {
+.char-img {
     width: 250px;
 }

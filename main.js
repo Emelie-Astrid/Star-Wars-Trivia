@@ -51,6 +51,7 @@ getNames().then((data) => {
         let radio = document.createElement("input");
         radio.type = "radio";
         radio.setAttribute("name", "person2");
+        radio.setAttribute("value", person.name);
         nameListTwo.append(listName);
         listName.prepend(radio);
     });
