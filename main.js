@@ -29,7 +29,6 @@ class Character {
 async function getNames() {
     let data = await fetch("https://swapi.dev/api/people/?format=json");
     let json = await data.json();
-    // console.log(json);
     return json;
 }
 
@@ -99,7 +98,8 @@ infoButtonOne.addEventListener("click", async () => {
       `Hair Color: ${character.hairColor}`,
       `Skin Color: ${character.skinColor}`,
       `Eye Color: ${character.eyeColor}`,
-      `Movies: ${character.movies.join(", ")}`,
+      // `Movies: ${character.movies.join(", ")}`,
+      `Number of movies: ${character.movies.length}`,
     ];
 
     console.log(characterInfoOne);
@@ -136,7 +136,7 @@ infoButtonOne.addEventListener("click", async () => {
       characterData.films,
       `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
     );
-    
+
     // console.log(character.pictureUrl);
 
     characterInfoTwo = [
@@ -147,7 +147,8 @@ infoButtonOne.addEventListener("click", async () => {
       `Hair Color: ${character.hairColor}`,
       `Skin Color: ${character.skinColor}`,
       `Eye Color: ${character.eyeColor}`,
-      `Movies: ${character.movies.join(", ")}`,
+      // `Movies: ${character.movies.join(", ")}`,
+       `Number of movies: ${character.movies.length}`,
     ];
 
     console.log(characterInfoTwo);
@@ -159,6 +160,10 @@ infoButtonOne.addEventListener("click", async () => {
   });
 
   compareButton.addEventListener("click", () => {
+    if (characterInfoOne.length === 0 || characterInfoTwo.length === 0) {
+      alert("Please select two characters to compare.");
+      return;
+    }
     charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
     charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
   });
