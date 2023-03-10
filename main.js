@@ -6,7 +6,11 @@ let infoButtonOne = document.querySelector("#char1-button");
 let infoButtonTwo = document.querySelector("#char2-button");
 let charImg = document.querySelector("#char1-image");
 let charImg2 = document.querySelector("#char2-image");
+let charInfo = document.querySelector("#char1-info");
+let charInfo2 = document.querySelector("#char2-info");
 let compareButton = document.querySelector("#compare-button");
+let characterInfoOne = [];
+let characterInfoTwo = [];
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
@@ -87,6 +91,19 @@ infoButtonOne.addEventListener("click", async () => {
 
     // console.log(character.pictureUrl);
 
+    characterInfoOne = [
+      `Name: ${character.name}`,
+      `Gender: ${character.gender}`,
+      `Height: ${character.height} cm`,
+      `Mass: ${character.mass} kg`,
+      `Hair Color: ${character.hairColor}`,
+      `Skin Color: ${character.skinColor}`,
+      `Eye Color: ${character.eyeColor}`,
+      `Movies: ${character.movies.join(", ")}`,
+    ];
+
+    console.log(characterInfoOne);
+
     charName.innerText = characterData.name;
     charImg.src = character.pictureUrl;
 
@@ -106,7 +123,7 @@ infoButtonOne.addEventListener("click", async () => {
     let json = await data.json();
     let characterData = json.results[0];
 
-    console.log(characterData);
+    // console.log(characterData);
   
     let character = new Character(
       characterData.name,
@@ -119,19 +136,29 @@ infoButtonOne.addEventListener("click", async () => {
       characterData.films,
       `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
     );
+    
+    // console.log(character.pictureUrl);
 
-    console.log(character.pictureUrl);
+    characterInfoTwo = [
+      `Name: ${character.name}`,
+      `Gender: ${character.gender}`,
+      `Height: ${character.height} cm`,
+      `Mass: ${character.mass} kg`,
+      `Hair Color: ${character.hairColor}`,
+      `Skin Color: ${character.skinColor}`,
+      `Eye Color: ${character.eyeColor}`,
+      `Movies: ${character.movies.join(", ")}`,
+    ];
+
+    console.log(characterInfoTwo);
 
     charName2.innerText = characterData.name;
     charImg2.src = character.pictureUrl;
 
     // console.log(character);
   });
-//The user should then be able to click a button to retrieve data 
-//about the characters. Once the data is retrieved, 
-//create two instances of the Character class, 
-//and give the properties of the class values based on the retrieved data. 
-//ATTENTION! The API does not provide you with images 
-//- So you need to produce these yourself.
 
-//Button, check selected characters
+  compareButton.addEventListener("click", () => {
+    charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+    charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  });
