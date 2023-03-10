@@ -6,3 +6,12 @@ ul {
     list-style: none;
     padding-left: 0px;
 }
+
+.char-list {
+    display:flex;
+    flex-direction: column;
+}
+
+#char1-image {
+    width: 250px;
+}
