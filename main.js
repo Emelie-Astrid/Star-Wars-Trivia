@@ -9,11 +9,13 @@ let charName2 = document.querySelector("#char2-name");
 let charInfo = document.querySelector("#char1-info");
 let charInfo2 = document.querySelector("#char2-info");
 let compareButton = document.querySelector("#compare-button");
-let compareDiv = document.querySelector("#comparasion");
+let compareDiv = document.querySelector("#comparison");
 let characterInfoOne = [];
 let characterInfoTwo = [];
 let numInfoOne = [];
 let numInfoTwo = [];
+let stringInfoOne = [];
+let stringInfoTwo = [];
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
@@ -72,7 +74,8 @@ infoButtonOne.addEventListener("click", async () => {
       alert("Please select a character");
       return;
     }
-  
+
+    
     let characterName = selectedRadio.value;
   
     let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
@@ -102,6 +105,13 @@ infoButtonOne.addEventListener("click", async () => {
       characterData.films.length
     ]
 
+    stringInfoOne = [
+      characterData.name,
+      characterData.gender,
+      characterData.hairColor,
+      characterData.eyeColor
+    ]
+
     // console.log(numInfoOne);
 
     characterInfoOne = [
@@ -123,6 +133,7 @@ infoButtonOne.addEventListener("click", async () => {
   //Info button two - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 infoButtonTwo.addEventListener("click", async () => {
   let selectedRadio = document.querySelector('input[name="person2"]:checked');
+  
   if (!selectedRadio) {
     alert("Please select a character");
     return;
@@ -157,6 +168,13 @@ infoButtonTwo.addEventListener("click", async () => {
     characterData.films.length
   ]
 
+  stringInfoTwo = [
+    characterData.name,
+    characterData.gender,
+    characterData.hairColor,
+    characterData.eyeColor
+  ]
+
   // console.log(numInfoTwo);
 
   characterInfoTwo = [
@@ -187,38 +205,59 @@ compareButton.addEventListener("click", () => {
     return;
   }
 
+  let charOneName = stringInfoOne[0];
+  let charTwoName = stringInfoTwo[0];
+
   //height
   if (numInfoOne[0] > numInfoTwo[0]) {
-    console.log("char one is taller than char two")
+    let comp = document.createElement("p");
+    comp.innerText = `${charOneName} is taller than ${charTwoName}`;
+    compareDiv.append(comp);
   }
   else if (numInfoOne[0] < numInfoTwo[0]) {
-    console.log("char two is taller than char one")
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} is taller than ${charOneName}`;
+    compareDiv.append(comp);
   }
-  else{
-    console.log("they are the same height");
+  else {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} are the same height`;
+    compareDiv.append(comp);
   }
   
   //mass
   if (numInfoOne[1] > numInfoTwo[1]) {
-    console.log("char one is heavier than char two")
+    let comp = document.createElement("p");
+    comp.innerText = `${charOneName} is heavier than ${charTwoName}`;
+    compareDiv.append(comp);
   }
   else if (numInfoOne[1] < numInfoTwo[1]) {
-    console.log("char two is heavier than char one")
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} is heavier than ${charOneName}`;
+    compareDiv.append(comp);
   }
-  else{
-    console.log("they are the same mass");
+  else {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} are the same weight`;
+    compareDiv.append(comp);
   }
   
   
   //number of movies
   if (numInfoOne[2] > numInfoTwo[2]) {
-    console.log("char one has been in more movies than char two")
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
+    compareDiv.append(comp);
   }
   else if (numInfoOne[2] < numInfoTwo[2]) {
-    console.log("char two has been in more movies than char one")
+    let comp = document.createElement("p");
+    comp.innerText = `${charOneName} appears in more movies than ${charTwoName}`;
+    compareDiv.append(comp);
   }
   else{
-    console.log("they have appeared in the same number of movies");
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} appear in the same number of movies`;
+    compareDiv.append(comp);
   }
 
   charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
