@@ -9,6 +9,7 @@ let charName2 = document.querySelector("#char2-name");
 let charInfo = document.querySelector("#char1-info");
 let charInfo2 = document.querySelector("#char2-info");
 let compareButton = document.querySelector("#compare-button");
+let compareDiv = document.querySelector("#comparasion");
 let characterInfoOne = [];
 let characterInfoTwo = [];
 let numInfoOne = [];
@@ -93,7 +94,7 @@ infoButtonOne.addEventListener("click", async () => {
       `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
     );
 
-    console.log(characterData.height, typeof characterData.height);
+    // console.log(characterData.height, typeof characterData.height);
     
     numInfoOne = [
       characterData.height,
@@ -101,7 +102,7 @@ infoButtonOne.addEventListener("click", async () => {
       characterData.films.length
     ]
 
-    console.log(numInfoOne);
+    // console.log(numInfoOne);
 
     characterInfoOne = [
       `Name: ${character.name}`,
@@ -156,7 +157,7 @@ infoButtonTwo.addEventListener("click", async () => {
     characterData.films.length
   ]
 
-  console.log(numInfoTwo);
+  // console.log(numInfoTwo);
 
   characterInfoTwo = [
     `Name: ${character.name}`,
@@ -185,20 +186,15 @@ compareButton.addEventListener("click", () => {
     alert("Please select two characters");
     return;
   }
-  // charInfo.innerHTML = "";
-  // charInfo2.innerHTML = "";
-  
-  let heightOne = parseInt(characterInfoOne.height);
-  let heightTwo = characterInfoTwo[2];
-  console.log(heightOne, typeof heightOne);
-  console.log(heightTwo);
 
-  if (heightOne > heightTwo) {
-    console.log("char one är längre än char two")
-  } else if (heightOne < heightTwo) {
-    console.log("char two är längre än char one")
-  } else {
-    console.log("lika långa");
+  if (numInfoOne[0] > numInfoTwo[0]) {
+    console.log("char one is taller than char two")
+  }
+  else if (numInfoOne[0] < numInfoTwo[0]) {
+    console.log("char two is taller than char one")
+  }
+  else{
+    console.log("they are the same height");
   }
 
   charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
