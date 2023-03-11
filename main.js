@@ -74,7 +74,6 @@ infoButtonOne.addEventListener("click", async () => {
       alert("Please select a character");
       return;
     }
-
     
     let characterName = selectedRadio.value;
   
@@ -128,12 +127,14 @@ infoButtonOne.addEventListener("click", async () => {
 
     charName.innerText = characterData.name;
     charImg.src = character.pictureUrl;
+    charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+    charInfo.setAttribute("hidden", "");
   });
 
   //Info button two - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 infoButtonTwo.addEventListener("click", async () => {
   let selectedRadio = document.querySelector('input[name="person2"]:checked');
-  
+
   if (!selectedRadio) {
     alert("Please select a character");
     return;
@@ -193,6 +194,8 @@ infoButtonTwo.addEventListener("click", async () => {
 
   charName2.innerText = characterData.name;
   charImg2.src = character.pictureUrl;
+  charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  charInfo2.setAttribute("hidden", "");
 
   // console.log(character);
 });
@@ -200,6 +203,7 @@ infoButtonTwo.addEventListener("click", async () => {
 //Compare button one - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 compareButton.addEventListener("click", () => {
+  compareDiv.innerHTML = "";
   if (characterInfoOne.length === 0 || characterInfoTwo.length === 0) {
     alert("Please select two characters");
     return;
@@ -242,7 +246,6 @@ compareButton.addEventListener("click", () => {
     compareDiv.append(comp);
   }
   
-  
   //number of movies
   if (numInfoOne[2] > numInfoTwo[2]) {
     let comp = document.createElement("p");
@@ -254,12 +257,14 @@ compareButton.addEventListener("click", () => {
     comp.innerText = `${charOneName} appears in more movies than ${charTwoName}`;
     compareDiv.append(comp);
   }
-  else{
+  else {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} appear in the same number of movies`;
     compareDiv.append(comp);
   }
 
-  charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
-  charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  // charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+  // charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  charInfo.removeAttribute("hidden", "");
+  charInfo2.removeAttribute("hidden", "");
 });
