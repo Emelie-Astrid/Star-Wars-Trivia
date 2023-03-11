@@ -149,7 +149,7 @@ infoButtonTwo.addEventListener("click", async () => {
     `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
   );
 
-  console.log(characterData.height, typeof characterData.height);
+  // console.log(characterData.height, typeof characterData.height);
 
   numInfoTwo = [
     characterData.height,
@@ -187,6 +187,7 @@ compareButton.addEventListener("click", () => {
     return;
   }
 
+  //height
   if (numInfoOne[0] > numInfoTwo[0]) {
     console.log("char one is taller than char two")
   }
@@ -195,6 +196,29 @@ compareButton.addEventListener("click", () => {
   }
   else{
     console.log("they are the same height");
+  }
+  
+  //mass
+  if (numInfoOne[1] > numInfoTwo[1]) {
+    console.log("char one is heavier than char two")
+  }
+  else if (numInfoOne[1] < numInfoTwo[1]) {
+    console.log("char two is heavier than char one")
+  }
+  else{
+    console.log("they are the same mass");
+  }
+  
+  
+  //number of movies
+  if (numInfoOne[2] > numInfoTwo[2]) {
+    console.log("char one has been in more movies than char two")
+  }
+  else if (numInfoOne[2] < numInfoTwo[2]) {
+    console.log("char two has been in more movies than char one")
+  }
+  else{
+    console.log("they have appeared in the same number of movies");
   }
 
   charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
