@@ -1,23 +1,25 @@
 let nameListOne = document.querySelector("#name-list-1");
 let nameListTwo = document.querySelector("#name-list-2");
-let charName = document.querySelector("#char1-name");
-let charName2 = document.querySelector("#char2-name");
 let infoButtonOne = document.querySelector("#char1-button");
 let infoButtonTwo = document.querySelector("#char2-button");
 let charImg = document.querySelector("#char1-image");
 let charImg2 = document.querySelector("#char2-image");
+let charName = document.querySelector("#char1-name");
+let charName2 = document.querySelector("#char2-name");
 let charInfo = document.querySelector("#char1-info");
 let charInfo2 = document.querySelector("#char2-info");
 let compareButton = document.querySelector("#compare-button");
 let characterInfoOne = [];
 let characterInfoTwo = [];
+let numInfoOne = [];
+let numInfoTwo = [];
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
         this.name = name;
         this.gender = gender;
-        this.height = Number(height);
-        this.mass = Number(mass);
+        this.height = height;
+        this.mass = mass;
         this.hairColor = hairColor;
         this.skinColor = skinColor;
         this.eyeColor = eyeColor;
@@ -32,7 +34,7 @@ async function getNames() {
     return json;
 }
 
-//List 1 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Name list 1 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
@@ -46,7 +48,7 @@ getNames().then((data) => {
     });
 });
 
-//List 2 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Name list 2 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
@@ -64,7 +66,9 @@ getNames().then((data) => {
 
 infoButtonOne.addEventListener("click", async () => {
     let selectedRadio = document.querySelector('input[name="person"]:checked');
+
     if (!selectedRadio) {
+      alert("Please select a character");
       return;
     }
   
@@ -74,13 +78,14 @@ infoButtonOne.addEventListener("click", async () => {
     let json = await data.json();
     let characterData = json.results[0];
 
-    // console.log(characterData);
+    characterData.height = Number(characterData.height);
+    characterData.mass = Number(characterData.mass);
   
     let character = new Character(
       characterData.name,
       characterData.gender,
-      characterData.height,
-      characterData.mass,
+      Number(characterData.height),
+      Number(characterData.mass),
       characterData.hair_color,
       characterData.skin_color,
       characterData.eye_color,
@@ -88,7 +93,15 @@ infoButtonOne.addEventListener("click", async () => {
       `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
     );
 
-    // console.log(character.pictureUrl);
+    console.log(characterData.height, typeof characterData.height);
+    
+    numInfoOne = [
+      characterData.height,
+      characterData.mass,
+      characterData.films.length
+    ]
+
+    console.log(numInfoOne);
 
     characterInfoOne = [
       `Name: ${character.name}`,
@@ -102,68 +115,92 @@ infoButtonOne.addEventListener("click", async () => {
       `Number of movies: ${character.movies.length}`,
     ];
 
-    console.log(characterInfoOne);
-
     charName.innerText = characterData.name;
     charImg.src = character.pictureUrl;
-
-    // console.log(character);
   });
 
   //Info button two - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  infoButtonTwo.addEventListener("click", async () => {
-    let selectedRadio = document.querySelector('input[name="person2"]:checked');
-    if (!selectedRadio) {
-      return;
-    }
+infoButtonTwo.addEventListener("click", async () => {
+  let selectedRadio = document.querySelector('input[name="person2"]:checked');
+  if (!selectedRadio) {
+    alert("Please select a character");
+    return;
+  }
+
+  let characterName = selectedRadio.value;
+
+  let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
+  let json = await data.json();
+  let characterData = json.results[0];
+
+  characterData.height = Number(characterData.height);
+  characterData.mass = Number(characterData.mass);
+
+  let character = new Character(
+    characterData.name,
+    characterData.gender,
+    Number(characterData.height),
+    Number(characterData.mass),
+    characterData.hair_color,
+    characterData.skin_color,
+    characterData.eye_color,
+    characterData.films,
+    `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
+  );
+
+  console.log(characterData.height, typeof characterData.height);
+
+  numInfoTwo = [
+    characterData.height,
+    characterData.mass,
+    characterData.films.length
+  ]
+
+  console.log(numInfoTwo);
+
+  characterInfoTwo = [
+    `Name: ${character.name}`,
+    `Gender: ${character.gender}`,
+    `Height: ${character.height} cm`,
+    `Mass: ${character.mass} kg`,
+    `Hair Color: ${character.hairColor}`,
+    `Skin Color: ${character.skinColor}`,
+    `Eye Color: ${character.eyeColor}`,
+    // `Movies: ${character.movies.join(", ")}`,
+      `Number of movies: ${character.movies.length}`,
+  ];
+
+  // console.log(characterInfoTwo);
+
+  charName2.innerText = characterData.name;
+  charImg2.src = character.pictureUrl;
+
+  // console.log(character);
+});
+
+//Compare button one - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+compareButton.addEventListener("click", () => {
+  if (characterInfoOne.length === 0 || characterInfoTwo.length === 0) {
+    alert("Please select two characters");
+    return;
+  }
+  // charInfo.innerHTML = "";
+  // charInfo2.innerHTML = "";
   
-    let characterName = selectedRadio.value;
-  
-    let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
-    let json = await data.json();
-    let characterData = json.results[0];
+  let heightOne = parseInt(characterInfoOne.height);
+  let heightTwo = characterInfoTwo[2];
+  console.log(heightOne, typeof heightOne);
+  console.log(heightTwo);
 
-    // console.log(characterData);
-  
-    let character = new Character(
-      characterData.name,
-      characterData.gender,
-      characterData.height,
-      characterData.mass,
-      characterData.hair_color,
-      characterData.skin_color,
-      characterData.eye_color,
-      characterData.films,
-      `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
-    );
+  if (heightOne > heightTwo) {
+    console.log("char one är längre än char two")
+  } else if (heightOne < heightTwo) {
+    console.log("char two är längre än char one")
+  } else {
+    console.log("lika långa");
+  }
 
-    // console.log(character.pictureUrl);
-
-    characterInfoTwo = [
-      `Name: ${character.name}`,
-      `Gender: ${character.gender}`,
-      `Height: ${character.height} cm`,
-      `Mass: ${character.mass} kg`,
-      `Hair Color: ${character.hairColor}`,
-      `Skin Color: ${character.skinColor}`,
-      `Eye Color: ${character.eyeColor}`,
-      // `Movies: ${character.movies.join(", ")}`,
-       `Number of movies: ${character.movies.length}`,
-    ];
-
-    console.log(characterInfoTwo);
-
-    charName2.innerText = characterData.name;
-    charImg2.src = character.pictureUrl;
-
-    // console.log(character);
-  });
-
-  compareButton.addEventListener("click", () => {
-    if (characterInfoOne.length === 0 || characterInfoTwo.length === 0) {
-      alert("Please select two characters to compare.");
-      return;
-    }
-    charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
-    charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
-  });
+  charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+  charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+});
