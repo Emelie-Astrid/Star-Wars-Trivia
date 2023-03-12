@@ -254,7 +254,7 @@ compareButton.addEventListener("click", () => {
   }
   else if (numInfoOne[2] < numInfoTwo[2]) {
     let comp = document.createElement("p");
-    comp.innerText = `${charOneName} appears in more movies than ${charTwoName}`;
+    comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
     compareDiv.append(comp);
   }
   else {
@@ -263,8 +263,59 @@ compareButton.addEventListener("click", () => {
     compareDiv.append(comp);
   }
 
+
+  //gender comparasion
+
+  if (stringInfoOne[1] === "n/a" && stringInfoTwo[1] === "n/a") {
+    let comp = document.createElement("p");
+    comp.innerText = "Robot rock";
+    compareDiv.append(comp);
+  }
+  else if(stringInfoOne[1] === stringInfoTwo[1]) {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} are the same sex`;
+    compareDiv.append(comp);
+  }
+  else {
+    console.log("not same sex");
+  }
+
+  //Haircolor
+  if ((stringInfoOne[2] === "n/a" || stringInfoOne[2] === "none") && (stringInfoTwo[2] === "n/a" || stringInfoTwo[2] === "none")) {
+    let comp = document.createElement("p");
+    comp.innerText = "Who needs hair to look this fabulous?";
+    compareDiv.append(comp);
+  } 
+  else if (stringInfoOne[2] === stringInfoTwo[2]) {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} have the same hair color`;
+    compareDiv.append(comp);
+  } 
+  else {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} have different hair colors`;
+    compareDiv.append(comp);
+  }
+  
+  //Eyecolorcolor
+  if ((stringInfoOne[3] === "n/a" || stringInfoOne[3] === "none") && (stringInfoTwo[3] === "n/a" || stringInfoTwo[3] === "none")) {
+    let comp = document.createElement("p");
+    comp.innerText = "Who needs hair to look this fabulous?";
+    compareDiv.append(comp);
+  } 
+  else if(stringInfoOne[3] === stringInfoTwo[3]) {
+    let comp = document.createElement("p");
+    comp.innerText = `${charTwoName} and ${charOneName} have the same eyecolor`;
+    compareDiv.append(comp);
+  }
+  else {
+    console.log("not same eyecolor");
+  }
+
   // charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
   // charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
   charInfo.removeAttribute("hidden", "");
   charInfo2.removeAttribute("hidden", "");
 });
+
+//      ||
