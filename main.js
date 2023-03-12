@@ -170,8 +170,6 @@ infoButtonTwo.addEventListener("click", async () => {
     characterData.skin_color
   ]
 
-  console.log(characterData.hair_color)
-
   printArrTwo = [
     `Name: ${character.name}`,
     `Gender: ${character.gender}`,
@@ -274,7 +272,12 @@ function compareChar () {
 
   //Gender - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  if (charArrOne[1] === charArrTwo[1]) {
+  if (charArrOne[1] === "n/a" || charArrOne[1] === "none" && charArrTwo[1] === "n/a" || charArrTwo[1] === "none"){
+    let comp = document.createElement("p");
+    comp.innerText = "Gender: robot";
+    compareDiv.append(comp);
+  }
+  else if (charArrOne[1] === charArrTwo[1]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} are the same gender`;
     compareDiv.append(comp);
@@ -284,8 +287,12 @@ function compareChar () {
   }
 
   //Haircolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
-  if (charArrOne[4] === charArrTwo[2]) {
+  if (charArrOne[4] === "n/a" || charArrOne[4] === "none" && charArrTwo[4] === "n/a" || charArrTwo[4] === "none") {
+    let comp = document.createElement("p");
+    comp.innerText = "Who need hair to look this fabulous?";
+    compareDiv.append(comp);
+  }
+  else if (charArrOne[4] === charArrTwo[2]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} have the same hair color`;
     compareDiv.append(comp);
@@ -295,8 +302,7 @@ function compareChar () {
   }
   
   //Skincolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
-  if (charArrOne[7] === charArrTwo[7]) {
+ if (charArrOne[7] === charArrTwo[7]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} have the same skincolor`;
     compareDiv.append(comp);
@@ -311,14 +317,3 @@ function compareChar () {
 compareButton.addEventListener("click", () => {
   showInfo();
 });
-
-
-
-
-
-
-
-
-
-
-//      ||
