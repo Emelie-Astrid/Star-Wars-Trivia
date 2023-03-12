@@ -12,10 +12,8 @@ let compareButton = document.querySelector("#compare-button");
 let compareDiv = document.querySelector("#comparison");
 let characterInfoOne = [];
 let characterInfoTwo = [];
-let numInfoOne = [];
-let numInfoTwo = [];
-let stringInfoOne = [];
-let stringInfoTwo = [];
+let charArrOne = [];
+let charArrTwo = [];
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
@@ -38,6 +36,7 @@ async function getNames() {
 }
 
 //Name list 1 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
@@ -52,6 +51,7 @@ getNames().then((data) => {
 });
 
 //Name list 2 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 getNames().then((data) => {
     data.results.forEach((person)=> {
         let listName = document.createElement("li");
@@ -65,9 +65,11 @@ getNames().then((data) => {
     });
 });
 
-//Info button one - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//INFO BUTTON ONE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 infoButtonOne.addEventListener("click", async () => {
+    compareDiv.innerHTML = "";
+
     let selectedRadio = document.querySelector('input[name="person"]:checked');
 
     if (!selectedRadio) {
@@ -96,43 +98,39 @@ infoButtonOne.addEventListener("click", async () => {
       `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
     );
 
-    // console.log(characterData.height, typeof characterData.height);
-    
-    numInfoOne = [
-      characterData.height,
-      characterData.mass,
-      characterData.films.length
-    ]
-
-    stringInfoOne = [
+    charArrOne = [
       characterData.name,
       characterData.gender,
-      characterData.hairColor,
-      characterData.eyeColor
+      characterData.height,
+      characterData.mass,
+      characterData.hair_color,
+      characterData.eye_color,
+      characterData.films.length,
+      characterData.skin_color
     ]
 
-    // console.log(numInfoOne);
-
-    characterInfoOne = [
+    printArrOne = [
       `Name: ${character.name}`,
       `Gender: ${character.gender}`,
       `Height: ${character.height} cm`,
       `Mass: ${character.mass} kg`,
-      `Hair Color: ${character.hairColor}`,
-      `Skin Color: ${character.skinColor}`,
-      `Eye Color: ${character.eyeColor}`,
-      // `Movies: ${character.movies.join(", ")}`,
+      `Hair color: ${character.hairColor}`,
+      `Skin color: ${character.skinColor}`,
+      `Eye color: ${character.eyeColor}`,
       `Number of movies: ${character.movies.length}`,
     ];
 
     charName.innerText = characterData.name;
     charImg.src = character.pictureUrl;
-    charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+
+    charInfo.innerHTML = printArrOne.map((info) => `<li>${info}</li>`).join("");
     charInfo.setAttribute("hidden", "");
   });
 
-  //Info button two - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//INFO BUTTON TWO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 infoButtonTwo.addEventListener("click", async () => {
+  compareDiv.innerHTML = "";
   let selectedRadio = document.querySelector('input[name="person2"]:checked');
 
   if (!selectedRadio) {
@@ -161,64 +159,69 @@ infoButtonTwo.addEventListener("click", async () => {
     `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
   );
 
-  // console.log(characterData.height, typeof characterData.height);
-
-  numInfoTwo = [
-    characterData.height,
-    characterData.mass,
-    characterData.films.length
-  ]
-
-  stringInfoTwo = [
+  charArrTwo = [
     characterData.name,
     characterData.gender,
-    characterData.hairColor,
-    characterData.eyeColor
+    characterData.height,
+    characterData.mass,
+    characterData.hair_color,
+    characterData.eye_color,
+    characterData.films.length,
+    characterData.skin_color
   ]
 
-  // console.log(numInfoTwo);
+  console.log(characterData.hair_color)
 
-  characterInfoTwo = [
+  printArrTwo = [
     `Name: ${character.name}`,
     `Gender: ${character.gender}`,
     `Height: ${character.height} cm`,
     `Mass: ${character.mass} kg`,
-    `Hair Color: ${character.hairColor}`,
-    `Skin Color: ${character.skinColor}`,
-    `Eye Color: ${character.eyeColor}`,
-    // `Movies: ${character.movies.join(", ")}`,
-      `Number of movies: ${character.movies.length}`,
+    `Hair color: ${character.hairColor}`,
+    `Skin color: ${character.skinColor}`,
+    `Eye color: ${character.eyeColor}`,
+    `Number of movies: ${character.movies.length}`,
   ];
-
-  // console.log(characterInfoTwo);
 
   charName2.innerText = characterData.name;
   charImg2.src = character.pictureUrl;
-  charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  charInfo2.innerHTML = printArrTwo.map((info) => `<li>${info}</li>`).join("");
   charInfo2.setAttribute("hidden", "");
-
-  // console.log(character);
 });
 
-//Compare button one - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Function show info - - - - - - - - - - - - - - - - - - - - - - -
 
-compareButton.addEventListener("click", () => {
+function showInfo () {
   compareDiv.innerHTML = "";
-  if (characterInfoOne.length === 0 || characterInfoTwo.length === 0) {
+  
+  if (charArrOne.length === 0 || charArrTwo.length === 0) {
     alert("Please select two characters");
     return;
   }
 
-  let charOneName = stringInfoOne[0];
-  let charTwoName = stringInfoTwo[0];
+  compareChar();
 
-  //height
-  if (numInfoOne[0] > numInfoTwo[0]) {
+  // charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
+  // charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
+  charInfo.removeAttribute("hidden", "");
+  charInfo2.removeAttribute("hidden", "");
+}
+
+//Function compare characters - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function compareChar () {
+
+  let charOneName = charArrOne[0];
+  let charTwoName = charArrTwo[0];
+
+  //Height - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  if (charArrOne[2] > charArrTwo[2]) {
     let comp = document.createElement("p");
     comp.innerText = `${charOneName} is taller than ${charTwoName}`;
     compareDiv.append(comp);
   }
-  else if (numInfoOne[0] < numInfoTwo[0]) {
+  else if (charArrOne[2] < charArrTwo[2]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} is taller than ${charOneName}`;
     compareDiv.append(comp);
@@ -229,13 +232,14 @@ compareButton.addEventListener("click", () => {
     compareDiv.append(comp);
   }
   
-  //mass
-  if (numInfoOne[1] > numInfoTwo[1]) {
+  //Mass - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  if (charArrOne[3] > charArrTwo[3]) {
     let comp = document.createElement("p");
     comp.innerText = `${charOneName} is heavier than ${charTwoName}`;
     compareDiv.append(comp);
   }
-  else if (numInfoOne[1] < numInfoTwo[1]) {
+  else if (charArrOne[3] < charArrTwo[3]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} is heavier than ${charOneName}`;
     compareDiv.append(comp);
@@ -246,13 +250,14 @@ compareButton.addEventListener("click", () => {
     compareDiv.append(comp);
   }
   
-  //number of movies
-  if (numInfoOne[2] > numInfoTwo[2]) {
+  //Number of movies - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  if (charArrOne[6] > charArrTwo[6]) {
     let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
+    comp.innerText = `${charOneName} appears in more movies than ${charTwoName}`;
     compareDiv.append(comp);
   }
-  else if (numInfoOne[2] < numInfoTwo[2]) {
+  else if (charArrOne[6] < charArrTwo[6]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
     compareDiv.append(comp);
@@ -263,59 +268,53 @@ compareButton.addEventListener("click", () => {
     compareDiv.append(comp);
   }
 
+  //Gender - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  //gender comparasion
-
-  if (stringInfoOne[1] === "n/a" && stringInfoTwo[1] === "n/a") {
+  if (charArrOne[1] === charArrTwo[1]) {
     let comp = document.createElement("p");
-    comp.innerText = "Robot rock";
-    compareDiv.append(comp);
-  }
-  else if(stringInfoOne[1] === stringInfoTwo[1]) {
-    let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} are the same sex`;
+    comp.innerText = `${charTwoName} and ${charOneName} are the same gender`;
     compareDiv.append(comp);
   }
   else {
-    console.log("not same sex");
+    console.log("not same gender");
   }
 
-  //Haircolor
-  if ((stringInfoOne[2] === "n/a" || stringInfoOne[2] === "none") && (stringInfoTwo[2] === "n/a" || stringInfoTwo[2] === "none")) {
-    let comp = document.createElement("p");
-    comp.innerText = "Who needs hair to look this fabulous?";
-    compareDiv.append(comp);
-  } 
-  else if (stringInfoOne[2] === stringInfoTwo[2]) {
+  //Haircolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  if (charArrOne[4] === charArrTwo[2]) {
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} have the same hair color`;
     compareDiv.append(comp);
   } 
   else {
-    let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} have different hair colors`;
-    compareDiv.append(comp);
+    console.log("not same haircolor");
   }
   
-  //Eyecolorcolor
-  if ((stringInfoOne[3] === "n/a" || stringInfoOne[3] === "none") && (stringInfoTwo[3] === "n/a" || stringInfoTwo[3] === "none")) {
+  //Skincolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  if (charArrOne[7] === charArrTwo[7]) {
     let comp = document.createElement("p");
-    comp.innerText = "Who needs hair to look this fabulous?";
-    compareDiv.append(comp);
-  } 
-  else if(stringInfoOne[3] === stringInfoTwo[3]) {
-    let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} have the same eyecolor`;
+    comp.innerText = `${charTwoName} and ${charOneName} have the same skincolor`;
     compareDiv.append(comp);
   }
   else {
-    console.log("not same eyecolor");
+    console.log("not same skincolor");
   }
+}
 
-  // charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
-  // charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
-  charInfo.removeAttribute("hidden", "");
-  charInfo2.removeAttribute("hidden", "");
+//COMPARE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+compareButton.addEventListener("click", () => {
+  showInfo();
 });
+
+
+
+
+
+
+
+
+
 
 //      ||
