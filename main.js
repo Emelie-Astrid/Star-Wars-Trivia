@@ -198,6 +198,10 @@ function showInfo () {
     alert("Please select two characters");
     return;
   }
+  else if (charArrOne[0] === charArrTwo[0]) {
+    alert("You have selected the same character");
+    return;
+  }
 
   compareChar();
 
