@@ -68,76 +68,16 @@ getNames().then((data) => {
 //INFO BUTTON ONE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 infoButtonOne.addEventListener("click", async () => {
-    compareDiv.innerHTML = "";
-
-    let selectedRadio = document.querySelector('input[name="person"]:checked');
-
-    if (!selectedRadio) {
-      alert("Please select a character");
-      return;
-    }
-    
-    let characterName = selectedRadio.value;
-  
-    let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
-    let json = await data.json();
-    let characterData = json.results[0];
-
-    characterData.height = Number(characterData.height);
-    characterData.mass = Number(characterData.mass);
-  
-    let character = new Character(
-      characterData.name,
-      characterData.gender,
-      Number(characterData.height),
-      Number(characterData.mass),
-      characterData.hair_color,
-      characterData.skin_color,
-      characterData.eye_color,
-      characterData.films,
-      `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
-    );
-
-    charArrOne = [
-      characterData.name,
-      characterData.gender,
-      characterData.height,
-      characterData.mass,
-      characterData.hair_color,
-      characterData.eye_color,
-      characterData.films.length,
-      characterData.skin_color
-    ]
-
-    printArrOne = [
-      `Name: ${character.name}`,
-      `Gender: ${character.gender}`,
-      `Height: ${character.height} cm`,
-      `Mass: ${character.mass} kg`,
-      `Hair color: ${character.hairColor}`,
-      `Skin color: ${character.skinColor}`,
-      `Eye color: ${character.eyeColor}`,
-      `Number of movies: ${character.movies.length}`,
-    ];
-
-    charName.innerText = characterData.name;
-    charImg.src = character.pictureUrl;
-
-    charInfo.innerHTML = printArrOne.map((info) => `<li>${info}</li>`).join("");
-    charInfo.setAttribute("hidden", "");
-  });
-
-//INFO BUTTON TWO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-infoButtonTwo.addEventListener("click", async () => {
   compareDiv.innerHTML = "";
-  let selectedRadio = document.querySelector('input[name="person2"]:checked');
+  charInfo.innerHTML = "";
+
+  let selectedRadio = document.querySelector('input[name="person"]:checked');
 
   if (!selectedRadio) {
     alert("Please select a character");
     return;
   }
-
+  
   let characterName = selectedRadio.value;
 
   let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
@@ -159,7 +99,7 @@ infoButtonTwo.addEventListener("click", async () => {
     `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
   );
 
-  charArrTwo = [
+  charArrOne = [
     characterData.name,
     characterData.gender,
     characterData.height,
@@ -170,7 +110,7 @@ infoButtonTwo.addEventListener("click", async () => {
     characterData.skin_color
   ]
 
-  printArrTwo = [
+  printArrOne = [
     `Name: ${character.name}`,
     `Gender: ${character.gender}`,
     `Height: ${character.height} cm`,
@@ -181,10 +121,70 @@ infoButtonTwo.addEventListener("click", async () => {
     `Number of movies: ${character.movies.length}`,
   ];
 
-  charName2.innerText = characterData.name;
-  charImg2.src = character.pictureUrl;
-  charInfo2.innerHTML = printArrTwo.map((info) => `<li>${info}</li>`).join("");
-  charInfo2.setAttribute("hidden", "");
+  charName.innerText = characterData.name;
+  charImg.src = character.pictureUrl;
+  });
+
+//INFO BUTTON TWO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+infoButtonTwo.addEventListener("click", async () => {
+  compareDiv.innerHTML = "";
+  charInfo2.innerHTML = "";
+  
+  if (compareDiv.innerHTML === "") {
+    let selectedRadio = document.querySelector('input[name="person2"]:checked');
+
+    if (!selectedRadio) {
+      alert("Please select a character");
+      return;
+    }
+
+    let characterName = selectedRadio.value;
+
+    let data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
+    let json = await data.json();
+    let characterData = json.results[0];
+
+    characterData.height = Number(characterData.height);
+    characterData.mass = Number(characterData.mass);
+
+    let character = new Character(
+      characterData.name,
+      characterData.gender,
+      Number(characterData.height),
+      Number(characterData.mass),
+      characterData.hair_color,
+      characterData.skin_color,
+      characterData.eye_color,
+      characterData.films,
+      `/assets/${characterData.name.toLowerCase().replace(/ /g, "-")}.jpg`
+    );
+
+    charArrTwo = [
+      characterData.name,
+      characterData.gender,
+      characterData.height,
+      characterData.mass,
+      characterData.hair_color,
+      characterData.eye_color,
+      characterData.films.length,
+      characterData.skin_color
+    ]
+
+    printArrTwo = [
+      `Name: ${character.name}`,
+      `Gender: ${character.gender}`,
+      `Height: ${character.height} cm`,
+      `Mass: ${character.mass} kg`,
+      `Hair color: ${character.hairColor}`,
+      `Skin color: ${character.skinColor}`,
+      `Eye color: ${character.eyeColor}`,
+      `Number of movies: ${character.movies.length}`,
+    ];
+
+    charName2.innerText = characterData.name;
+    charImg2.src = character.pictureUrl;
+  }
 });
 
 //Function show info - - - - - - - - - - - - - - - - - - - - - - -
@@ -202,11 +202,7 @@ function showInfo () {
   }
 
   compareChar();
-
-  // charInfo.innerHTML = characterInfoOne.map((info) => `<li>${info}</li>`).join("");
-  // charInfo2.innerHTML = characterInfoTwo.map((info) => `<li>${info}</li>`).join("");
-  charInfo.removeAttribute("hidden", "");
-  charInfo2.removeAttribute("hidden", "");
+  printCharInfo();
 }
 
 //Function compare characters - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -264,22 +260,16 @@ function compareChar () {
     comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
     compareDiv.append(comp);
   }
-  else {
+  else if (charArrOne[6] === charArrTwo[6]){
     let comp = document.createElement("p");
     comp.innerText = `${charTwoName} and ${charOneName} appear in the same number of movies`;
     compareDiv.append(comp);
   }
 
   //Gender - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  if (charArrOne[1] === "n/a" || charArrOne[1] === "none" && charArrTwo[1] === "n/a" || charArrTwo[1] === "none"){
+   if (charArrOne[1] === charArrTwo[1]) {
     let comp = document.createElement("p");
-    comp.innerText = "Gender: robot";
-    compareDiv.append(comp);
-  }
-  else if (charArrOne[1] === charArrTwo[1]) {
-    let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} are the same gender`;
+    comp.innerText = `${charOneName} and ${charTwoName} are the same gender`;
     compareDiv.append(comp);
   }
   else {
@@ -287,14 +277,9 @@ function compareChar () {
   }
 
   //Haircolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  if (charArrOne[4] === "n/a" || charArrOne[4] === "none" && charArrTwo[4] === "n/a" || charArrTwo[4] === "none") {
+  if (charArrOne[4] === charArrTwo[2]) {
     let comp = document.createElement("p");
-    comp.innerText = "Who need hair to look this fabulous?";
-    compareDiv.append(comp);
-  }
-  else if (charArrOne[4] === charArrTwo[2]) {
-    let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} have the same hair color`;
+    comp.innerText = `${charOneName} and ${charTwoName} have the same hair color`;
     compareDiv.append(comp);
   } 
   else {
@@ -304,12 +289,27 @@ function compareChar () {
   //Skincolor - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  if (charArrOne[7] === charArrTwo[7]) {
     let comp = document.createElement("p");
-    comp.innerText = `${charTwoName} and ${charOneName} have the same skincolor`;
+    comp.innerText = `${charOneName} and ${charTwoName} have the same skincolor`;
     compareDiv.append(comp);
   }
   else {
     console.log("not same skincolor");
   }
+}
+
+//Function compare characters - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function printCharInfo () {
+  
+  charInfo.innerHTML = printArrOne.map((info) => `<li>${info}</li>`).join("");
+  charInfo2.innerHTML = printArrTwo.map((info) => `<li>${info}</li>`).join("");
+}
+
+//Function compare characters - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function hideCharInfo () {
+  charInfo.setAttribute("hidden", "");
+  charInfo2.setAttribute("hidden", "");
 }
 
 //COMPARE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
