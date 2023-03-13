@@ -1,3 +1,13 @@
+body {
+    font-family: sans-serif;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .name-lists {
     display: flex;
 }
@@ -16,6 +26,7 @@ ul {
     width: 250px;
 }
 
-/* li[data-tallest] {
-    color: blue;
-  } */
+.extra-information {
+    display:flex;
+    flex-direction: column;
+}

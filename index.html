@@ -9,30 +9,46 @@
     <title>Star Wars Trivia</title>
 </head>
 <body>
-    <h1>Star Wars Trivia</h1>
-    <h2>Compare Characters</h2>
-    <div class="name-lists" id="name-lists">
-        <div id="first-list" class="char-list">
-            <h3>First Character</h3>
-            <ul id="name-list-1"></ul>
-            <button id="char1-button">Get info</button>
-            <img id="char1-image" src="" alt="character image" class="char-img">
-            <h4 id="char1-name"></h4>
-            <ul id="char1-info"></ul>
+    <div class="content">
+        <h1>Star Wars Trivia</h1>
+        <h2>Compare Characters</h2>
+        <div class="name-lists" id="name-lists">
+            <div id="first-list" class="char-list">
+                <h3>First Character</h3>
+                <ul id="name-list-1"></ul>
+                <button id="char1-button">Get info</button>
+                <img id="char1-image" src="" alt="character image" class="char-img">
+                <h4 id="char1-name"></h4>
+                <ul id="char1-info"></ul>
+            </div>
+            <div id="second-list" class="char-list">
+                <h3>Second Character</h3>
+                <ul id="name-list-2"></ul>
+                <button id="char2-button">Get info</button>
+                <img id="char2-image" src="" alt="character image" class="char-img">
+                <h4 id="char2-name"></h4>
+                <ul id="char2-info"></ul>
+            </div>
         </div>
-        <div id="second-list" class="char-list">
-            <h3>Second Character</h3>
-            <ul id="name-list-2"></ul>
-            <button id="char2-button">Get info</button>
-            <img id="char2-image" src="" alt="character image" class="char-img">
-            <h4 id="char2-name"></h4>
-            <ul id="char2-info"></ul>
-        </div>
-    </div>
-    <div class="button">
         <button id="compare-button">Compare</button>
         <div id="comparison" class="comparison"></div>
+        <h2>Extra Information</h2>
+        <div class="extra-information">
+            <div class="date-div" id="date-div">
+                <button id="first-movie">Show dates for first movies</button>
+            </div>
+            <div class="movies-div" id="movies-div">
+                <button id="movies">Show movies appeared in</button>
+            </div>
+            <div class="homeplanet" id="homeplanet">
+                <button id="homeplanet">Compare homeplanets</button>
+            </div>
+            <div class="vehicle" id="vehicle">
+                <button id="vehicle">Show most expensive vehicle</button>
+            </div>
+        </div>
     </div>
+
 
 </body>
 </html>

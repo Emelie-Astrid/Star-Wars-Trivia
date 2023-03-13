@@ -14,6 +14,15 @@ let characterInfoOne = [];
 let characterInfoTwo = [];
 let charArrOne = [];
 let charArrTwo = [];
+let extraInfo = document.querySelector("#extra-information");
+let firstMovieButton = document.querySelector("#first-movie");
+let moviesButton = document.querySelector("#movies");
+let planetButton = document.querySelector("#homeplanet");
+let vehicleButton = document.querySelector("#vehicle");
+let dateDiv = document.querySelector("#date-div");
+let moviesDiv = document.querySelector("#movies-div");
+let homeplanetDiv = document.querySelector("#homeplanet");
+let vehicleDiv = document.querySelector("#vehicle");
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
@@ -27,15 +36,31 @@ class Character {
         this.movies = movies;
         this.pictureUrl = pictureUrl;
     }
+
+    async getFirstMovieReleaseDate() {
+      const movieUrl = this.movies[0];
+      const response = await fetch(movieUrl);
+      const data = await response.json();
+      return data.release_date;
+    }
+
+  getMovies() {
+  }
+
+  compareHomeplanets() {
+  }
+
+  getMostExpensiveBehicle() {
+  }
 }
+
+//Character lists - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 async function getNames() {
     let data = await fetch("https://swapi.dev/api/people/?format=json");
     let json = await data.json();
     return json;
 }
-
-//Name list 1 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 getNames().then((data) => {
     data.results.forEach((person)=> {
@@ -49,8 +74,6 @@ getNames().then((data) => {
         listName.prepend(radio);
     });
 });
-
-//Name list 2 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 getNames().then((data) => {
     data.results.forEach((person)=> {
@@ -107,7 +130,7 @@ infoButtonOne.addEventListener("click", async () => {
     characterData.hair_color,
     characterData.eye_color,
     characterData.films.length,
-    characterData.skin_color
+    characterData.skin_color,
   ]
 
   printArrOne = [
@@ -316,4 +339,67 @@ function hideCharInfo () {
 
 compareButton.addEventListener("click", () => {
   showInfo();
+});
+
+
+async function getFirstMovieDateOne() {
+  try {
+    const selectedRadio = document.querySelector('input[name="person"]:checked');
+
+    if (!selectedRadio) {
+      alert("Please select a character");
+      return;
+    }
+  
+    const characterName = selectedRadio.value;
+
+    const data = await fetch(`https://swapi.dev/api/people/?search=${characterName}`);
+    const json = await data.json();
+    const characterData = json.results[0];
+
+    const character = new Character(characterData.name, characterData.gender, characterData.height, characterData.mass, characterData.hair_color, characterData.skin_color, characterData.eye_color, characterData.films, characterData.pictureUrl);
+
+    const firstMovieDate = await character.getFirstMovieReleaseDate();
+    console.log(firstMovieDate);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+// async function getFirstMovieDateTwo() {
+//   try {
+//     const response = await fetch("https://swapi.dev/api/people/?format=json");
+//     const data = await response.json();
+//     const characters = data.results;
+//     const character = characters[0]; // Select the first character in the API response
+//     const lukeSkywalker = new Character(character.name, character.gender, character.height, character.mass, character.hair_color, character.skin_color, character.eye_color, character.films, character.pictureUrl);
+//     const firstMovieDate = await lukeSkywalker.getFirstMovie();
+//     console.log(firstMovieDate);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+firstMovieButton.addEventListener("click", () => {
+  getFirstMovieDateOne();
+});
+
+//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+moviesButton.addEventListener("click", async () => {
+
+});
+
+//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+planetButton.addEventListener("click", async () => {
+
+});
+
+//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+vehicleButton.addEventListener("click", async () => {
+
 });
