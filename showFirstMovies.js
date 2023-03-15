@@ -22,9 +22,9 @@ async function getFirstMovieDateOne() {
         characterData.gender, 
         characterData.height, 
         characterData.mass, 
-        characterData.hair_color, 
-        characterData.skin_color, 
-        characterData.eye_color, 
+        characterData.hairColor, 
+        characterData.skinColor, 
+        characterData.eyeColor, 
         characterData.films, 
         characterData.pictureUrl);
 

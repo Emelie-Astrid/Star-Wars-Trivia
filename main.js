@@ -1,10 +1,13 @@
 let extraInfo = document.querySelector("#extra-information");
-let moviesButton = document.querySelector("#movies");
 let planetButton = document.querySelector("#homeplanet");
 let vehicleButton = document.querySelector("#vehicle");
-let moviesDiv = document.querySelector("#movies-div");
 let homeplanetDiv = document.querySelector("#homeplanet");
 let vehicleDiv = document.querySelector("#vehicle");
+let movieTitles = [];
+// let moviesButton = document.querySelector("#movies");
+// let moviesDiv = document.querySelector("#movies-div");
+// let moviesList = document.querySelector("#movies-list-one");
+// let moviesListTwo = document.querySelector("#movies-list-two");
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
@@ -26,14 +29,17 @@ class Character {
       return data.release_date;
     }
 
-  getMovies() {
-  }
-
-  compareHomeplanets() {
-  }
-
-  getMostExpensiveBehicle() {
-  }
+    async getMovieTitles () {
+      let movieTitles = [];
+      for (let i = 0; i < this.movies.length; i++) {
+        let movieUrl = this.movies[i];
+        let response = await fetch(movieUrl);
+        let data = await response.json();
+        let title = data.title;
+        movieTitles.push({title});
+      }
+      return movieTitles;
+    }
 }
 
 async function getNames() {
@@ -43,24 +49,6 @@ async function getNames() {
 }
 
 
-function getMovieTitles () {
-
-}
-
-//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-moviesButton.addEventListener("click", async () => {
-
-});
-
-//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-planetButton.addEventListener("click", async () => {
-
-});
-
-//MOVIE BUTTON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-vehicleButton.addEventListener("click", async () => {
-
-});
+// moviesButton.addEventListener("click", () => {
+//   getMovieTitles();
+// });
