@@ -9,6 +9,8 @@ let charArrOne = [];
 async function fetchDataOne() {
     compareDiv.innerHTML = "";
     charInfo.innerHTML = "";
+    homeplanetDiv.innerHTML = "";
+    planetArr.length = 0;
   
     let selectedRadio = document.querySelector('input[name="person"]:checked');
   

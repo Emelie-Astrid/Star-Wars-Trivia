@@ -1,7 +1,13 @@
 let planetButton = document.querySelector("#planet-button");
 let homeplanetDiv = document.querySelector("#homeplanet");
+let planetInfo = document.querySelector("#planet-info");
+let planetArr = [];
+
+let homePlanetOne;
+let homePlanetTwo;
 
 async function showHomePlanet() {
+    homeplanetDiv.innerHTML = "";
     try {
         let selectedRadio = document.querySelector('input[name="person"]:checked');
   
@@ -29,18 +35,21 @@ async function showHomePlanet() {
         characterData.homeworld
         );
 
-        let homePlanetOne = await character.findHomePlanet();
+        homePlanetOne = await character.findHomePlanet();
 
         let homePlanet = document.createElement("p");
         homePlanet.innerText = `${homePlanetOne} is the homeplanet of ${firstChar}`;
         homeplanetDiv.append(homePlanet);
-        console.log("hej");
+
+        planetArr.push(homePlanetOne);
     }
     catch (error) {
         console.error(error);
         }
 }
+
 async function showHomePlanetTwo() {
+    homeplanetDiv.innerHTML = "";
     try {
         let selectedRadio = document.querySelector('input[name="person2"]:checked');
   
@@ -68,18 +77,38 @@ async function showHomePlanetTwo() {
         characterData.homeworld
         );
 
-        let homePlanetTwo = await character.findHomePlanet();
+        homePlanetTwo = await character.findHomePlanet();
 
         let homePlanet = document.createElement("p");
         homePlanet.innerText = `${homePlanetTwo} is the homeplanet of ${secondChar}`;
         homeplanetDiv.append(homePlanet);
+
+        planetArr.push(homePlanetTwo);
+        console.log(planetArr);
+
     }
     catch (error) {
         console.error(error);
         }
 }
 
+
+
+function comparePlanets () {
+    console.log(planetArr);
+    if (planetArr[0] === planetArr[1]) {
+        let comp = document.createElement("p");
+        let [planet] = planetArr;
+        comp.innerText = `${planet} is the same homeplanet for both characters`;
+        homeplanetDiv.append(comp);
+    }
+    planetArr.length = 0; 
+}
+
 planetButton.addEventListener("click", () => {
     showHomePlanet();
     showHomePlanetTwo();
+    setTimeout(() => {
+        comparePlanets();
+    }, 4000);
 });
