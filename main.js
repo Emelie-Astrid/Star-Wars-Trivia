@@ -1,16 +1,10 @@
 let extraInfo = document.querySelector("#extra-information");
-let planetButton = document.querySelector("#homeplanet");
 let vehicleButton = document.querySelector("#vehicle");
-let homeplanetDiv = document.querySelector("#homeplanet");
 let vehicleDiv = document.querySelector("#vehicle");
 let movieTitles = [];
-// let moviesButton = document.querySelector("#movies");
-// let moviesDiv = document.querySelector("#movies-div");
-// let moviesList = document.querySelector("#movies-list-one");
-// let moviesListTwo = document.querySelector("#movies-list-two");
 
 class Character {
-    constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl){
+    constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl, homeWorld){
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -20,6 +14,7 @@ class Character {
         this.eyeColor = eyeColor;
         this.movies = movies;
         this.pictureUrl = pictureUrl;
+        this.homeWorld = homeWorld;
     }
 
     async getFirstMovieDate() {
@@ -40,6 +35,12 @@ class Character {
       }
       return movieTitles;
     }
+
+    async findHomePlanet() {
+      let response = await fetch(this.homeWorld);
+      let data = await response.json();
+      return data.name;
+    }
 }
 
 async function getNames() {
@@ -47,8 +48,3 @@ async function getNames() {
   let json = await data.json();
   return json;
 }
-
-
-// moviesButton.addEventListener("click", () => {
-//   getMovieTitles();
-// });
