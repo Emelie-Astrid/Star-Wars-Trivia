@@ -31,3 +31,17 @@ ul {
     display:flex;
     flex-direction: column;
 }
+
+.movies-div {
+    display:flex;
+}
+
+.list-one {
+    display:flex;
+    flex-direction: column;
+}
+
+.list-two {
+    display:flex;
+    flex-direction: column;
+}
