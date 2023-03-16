@@ -41,11 +41,14 @@ h2 {
     width: 250px;
 }
 
+.comparison {
+    width: 300px;
+}
 .extra-information {
     display:flex;
     flex-direction: column;
     align-items: center;
-    width: 520px;
+    width: 480px;
 }
 
 .movies-div {
@@ -55,14 +58,28 @@ h2 {
 .list-one {
     display:flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 12px;
+    ul {
+        padding-left: 0px;
+        margin: 0px;
+        &:empty{
+            height: 0px;
+        }
+        
+    }
 }
 
 .list-two {
     display:flex;
     flex-direction: column;
-    padding: 16px;
-
+    padding: 12px;
+    ul {
+        padding-left: 0px;
+        margin: 0px;
+        &:empty{
+            height: 0px;
+        }
+    }
 }
 
 img {

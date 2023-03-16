@@ -99,8 +99,6 @@ async function getMostExpensiveRideTwo () {
             let highestPriceShipTwo = { price: 0 };
             rideinfoTwo.innerText = "";
 
-            console.log(rides);
-
             rides.forEach(ride => {
                 if (ride.price && ride.price > highestPriceShipTwo.price) {
                     highestPriceShipTwo = ride;
