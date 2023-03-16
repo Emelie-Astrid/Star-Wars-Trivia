@@ -41,12 +41,10 @@ async function getMostExpensiveRide () {
         let highestPriceShip = { price: 0 };
         rideinfo.innerText = "";
 
-        console.log(rides);
-
         rides.forEach(ride => {
-          if (ride.price && ride.price > highestPriceShip.price) {
-            highestPriceShip = ride;
-          }
+            if (ride.price && ride.price > highestPriceShip.price) {
+                highestPriceShip = ride;
+            }
         });
         
         if (highestPriceShip.name) {
@@ -104,10 +102,9 @@ async function getMostExpensiveRideTwo () {
             console.log(rides);
 
             rides.forEach(ride => {
-              if (ride.price && ride.price > highestPriceShipTwo.price) {
-                highestPriceShipTwo = ride;
-              }
-    
+                if (ride.price && ride.price > highestPriceShipTwo.price) {
+                    highestPriceShipTwo = ride;
+                }
             });
         
         if (highestPriceShipTwo.name) {
@@ -125,7 +122,6 @@ async function getMostExpensiveRideTwo () {
         console.error(error);
     }
 }
-
 
 vehicleButton.addEventListener("click", () => {
     getMostExpensiveRide();

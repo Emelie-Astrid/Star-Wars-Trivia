@@ -5,7 +5,6 @@ let charImg = document.querySelector("#char1-image");
 let characterInfoOne = [];
 let charArrOne = [];
 
-
 async function fetchDataOne() {
   compareDiv.innerHTML = "";
   dateDiv.innerHTML = "";

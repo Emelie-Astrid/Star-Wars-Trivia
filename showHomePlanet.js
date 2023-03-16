@@ -91,12 +91,9 @@ async function showHomePlanetTwo() {
         }
 }
 
-
-
 function comparePlanets () {
     if (planetArr[0] === planetArr[1]) {
         let comp = document.createElement("p");
-        let planet = planetArr[0];
         comp.innerText = "The characters has the same homeplanet";
         homeplanetDiv.append(comp);
     }
@@ -108,5 +105,5 @@ planetButton.addEventListener("click", () => {
     showHomePlanetTwo();
     setTimeout(() => {
         comparePlanets();
-    }, 4000);
+    }, 6000);
 });

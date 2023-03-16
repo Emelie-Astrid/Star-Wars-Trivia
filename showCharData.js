@@ -15,7 +15,6 @@ function showCharData () {
       charInfo.innerHTML = printArrOne.map((info) => `<li>${info}</li>`).join("");
       charInfoTwo.innerHTML = printArrTwo.map((info) => `<li>${info}</li>`).join("");
     }
-  
     compareChar();
 }
 

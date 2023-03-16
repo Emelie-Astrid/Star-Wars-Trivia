@@ -1,7 +1,3 @@
-let extraInfo = document.querySelector("#extra-information");
-let movieTitles = [];
-
-
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl, homeWorld, vehicles, starships){
         this.name = name;

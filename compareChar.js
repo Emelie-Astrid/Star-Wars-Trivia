@@ -53,7 +53,7 @@ function compareChar () {
       comp.innerText = `${charTwoName} appears in more movies than ${charOneName}`;
       compareDiv.append(comp);
     }
-    else if (charArrOne[6] === charArrTwo[6]){
+    else if (charArrOne[6] === charArrTwo[6]) {
       let comp = document.createElement("p");
       comp.innerText = `${charTwoName} and ${charOneName} appear in the same number of movies`;
       compareDiv.append(comp);
