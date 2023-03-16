@@ -16,6 +16,8 @@ async function fetchDataTwo() {
   titlesOne.innerHTML = "";
   titlesTwo.innerHTML = "";
   planetArr.length = 0;
+  rideinfoTwo.innerHTML = "";
+  highestPriceTwo = 0;
   
     let selectedRadio = document.querySelector('input[name="person2"]:checked');
 

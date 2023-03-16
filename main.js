@@ -1,6 +1,6 @@
 let extraInfo = document.querySelector("#extra-information");
 let movieTitles = [];
-let vehicleArr = [];
+
 
 class Character {
     constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl, homeWorld, vehicles, starships){
@@ -43,32 +43,36 @@ class Character {
       return data.name;
     }
 
-    async findVehicle () {
+    async findVehicles () {
         if (!this.vehicles) {
         return;
       }
+      let rides = [];
       for (let i = 0; i < this.vehicles.length; i++) {
-      let vehicleUrl = this.vehicles[i];
-      let response = await fetch(vehicleUrl);
-      let data = await response.json();
-      let name = data.name;
-      let price = parseInt(data.cost_in_credits, 10);
-      vehicleArr.push({name, price}); 
+        let vehicleUrl = this.vehicles[i];
+        let response = await fetch(vehicleUrl);
+        let data = await response.json();
+        let name = data.name;
+        let price = parseInt(data.cost_in_credits, 10);
+        rides.push({name, price}); 
       }
+      return rides;
     }
     
-    async findStarship () {
+    async findStarships () {
       if (!this.starships) {
         return;
       }
+      let rides = [];
       for (let i = 0; i < this.starships.length; i++) {
         let starshipUrl = this.starships[i];
         let response = await fetch(starshipUrl);
         let data = await response.json();
         let name = data.name;
         let price = parseInt(data.cost_in_credits, 10);
-        vehicleArr.push({name, price}); 
+        rides.push({name, price}); 
       }
+      return rides;
     }
 }
 

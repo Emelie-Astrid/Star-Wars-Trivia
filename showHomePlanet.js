@@ -42,9 +42,9 @@ async function showHomePlanet() {
         homeplanetDiv.append(homePlanet);
 
         planetArr.push(homePlanetOne);
-    }
-    catch (error) {
-        console.error(error);
+        }
+        catch (error) {
+            console.error(error);
         }
 }
 
@@ -84,7 +84,6 @@ async function showHomePlanetTwo() {
         homeplanetDiv.append(homePlanet);
 
         planetArr.push(homePlanetTwo);
-        console.log(planetArr);
 
     }
     catch (error) {
@@ -95,14 +94,13 @@ async function showHomePlanetTwo() {
 
 
 function comparePlanets () {
-    console.log(planetArr);
     if (planetArr[0] === planetArr[1]) {
         let comp = document.createElement("p");
-        let [planet] = planetArr;
-        comp.innerText = `${planet} is the same homeplanet for both characters`;
+        let planet = planetArr[0];
+        comp.innerText = "The characters has the same homeplanet";
         homeplanetDiv.append(comp);
     }
-    planetArr.length = 0; 
+    planetArr = []; 
 }
 
 planetButton.addEventListener("click", () => {
