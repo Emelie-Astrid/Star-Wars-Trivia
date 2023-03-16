@@ -1,10 +1,9 @@
 let extraInfo = document.querySelector("#extra-information");
-let vehicleButton = document.querySelector("#vehicle");
-let vehicleDiv = document.querySelector("#vehicle");
 let movieTitles = [];
+let vehicleArr = [];
 
 class Character {
-    constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl, homeWorld){
+    constructor(name, gender, height, mass, hairColor, skinColor, eyeColor, movies, pictureUrl, homeWorld, vehicles, starships){
         this.name = name;
         this.gender = gender;
         this.height = height;
@@ -15,6 +14,8 @@ class Character {
         this.movies = movies;
         this.pictureUrl = pictureUrl;
         this.homeWorld = homeWorld;
+        this.vehicles = vehicles;
+        this.starships = starships;
     }
 
     async getFirstMovieDate() {
@@ -40,6 +41,34 @@ class Character {
       let response = await fetch(this.homeWorld);
       let data = await response.json();
       return data.name;
+    }
+
+    async findVehicle () {
+        if (!this.vehicles) {
+        return;
+      }
+      for (let i = 0; i < this.vehicles.length; i++) {
+      let vehicleUrl = this.vehicles[i];
+      let response = await fetch(vehicleUrl);
+      let data = await response.json();
+      let name = data.name;
+      let price = parseInt(data.cost_in_credits, 10);
+      vehicleArr.push({name, price}); 
+      }
+    }
+    
+    async findStarship () {
+      if (!this.starships) {
+        return;
+      }
+      for (let i = 0; i < this.starships.length; i++) {
+        let starshipUrl = this.starships[i];
+        let response = await fetch(starshipUrl);
+        let data = await response.json();
+        let name = data.name;
+        let price = parseInt(data.cost_in_credits, 10);
+        vehicleArr.push({name, price}); 
+      }
     }
 }
 

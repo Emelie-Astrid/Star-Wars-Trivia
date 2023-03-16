@@ -9,6 +9,7 @@ let titlesTwo = document.querySelector("#movie-titles-two");
 
 async function getMovieTitlesOne () {
     moviesList.innerHTML = "";
+    moviesListTwo.innerHTML = "";
     try {
         let selectedRadio = document.querySelector('input[name="person"]:checked');
   
@@ -53,6 +54,7 @@ async function getMovieTitlesOne () {
 
 async function getMovieTitlesTwo () {
     moviesList.innerHTML = "";
+    moviesListTwo.innerHTML = "";
     try {
         let selectedRadio = document.querySelector('input[name="person2"]:checked');
   

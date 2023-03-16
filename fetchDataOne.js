@@ -7,10 +7,15 @@ let charArrOne = [];
 
 
 async function fetchDataOne() {
-    compareDiv.innerHTML = "";
-    charInfo.innerHTML = "";
-    homeplanetDiv.innerHTML = "";
-    planetArr.length = 0;
+  compareDiv.innerHTML = "";
+  dateDiv.innerHTML = "";
+  charInfo.innerHTML = "";
+  homeplanetDiv.innerHTML = "";
+  moviesList.innerHTML = "";
+  moviesListTwo.innerHTML = "";
+  titlesOne.innerHTML = "";
+  titlesTwo.innerHTML = "";
+  planetArr.length = 0;
   
     let selectedRadio = document.querySelector('input[name="person"]:checked');
   
