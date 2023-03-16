@@ -1,6 +1,19 @@
 body {
-    font-family: sans-serif;
-    background-color: wheat;
+    background-color: $ice;
+    font-family: $space;
+    color: $midnight;
+}
+
+h1 {
+    font-family: $space;
+    font-size: 48px;
+    margin: 20px;
+}
+
+h2 {
+    font-family: $space;
+    font-size: 36px;
+    margin: 20px;
 }
 
 .content {
@@ -13,14 +26,15 @@ body {
     display: flex;
 }
 
-ul {
-    list-style: none;
-    padding-left: 0px;
-}
-
 .char-list {
     display:flex;
     flex-direction: column;
+    align-items: center;
+    ul {
+        list-style: none;
+        padding-left: 0px;
+        margin: 0px;
+    }
 }
 
 .char-img {
@@ -30,6 +44,8 @@ ul {
 .extra-information {
     display:flex;
     flex-direction: column;
+    align-items: center;
+    width: 520px;
 }
 
 .movies-div {
@@ -39,13 +55,37 @@ ul {
 .list-one {
     display:flex;
     flex-direction: column;
+    padding: 16px;
 }
 
 .list-two {
     display:flex;
     flex-direction: column;
+    padding: 16px;
+
 }
 
 img {
     border-radius: 48px;
+    height: 200px;
+    margin: 12px;
+    object-fit: cover;
 }
+
+button {
+    font-family: $space;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: $teal;
+    color: $ice;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($teal, 10%);
+    }
+  }
+  
