@@ -1,0 +1,51 @@
+body {
+  font-family: sans-serif;
+  background-color: wheat;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name-lists {
+  display: flex;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.char-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.char-img {
+  width: 250px;
+}
+
+.extra-information {
+  display: flex;
+  flex-direction: column;
+}
+
+.movies-div {
+  display: flex;
+}
+
+.list-one {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-two {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  border-radius: 48px;
+}/*# sourceMappingURL=style.css.map */
